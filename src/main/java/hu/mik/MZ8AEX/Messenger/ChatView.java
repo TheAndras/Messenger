@@ -6,7 +6,7 @@ public class ChatView extends ChatUI {
 	//private boolean evenRow = false;
 
 	public ChatView(String Username) {
-		lblNev.setValue("You are logged in as asas"+Username);
+		lblNev.setValue("You are logged in as "+Username);
 		txtMessage.setPlaceholder("Message");
 	}
 
