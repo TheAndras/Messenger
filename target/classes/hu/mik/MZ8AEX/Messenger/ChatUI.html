@@ -1,0 +1,33 @@
+<!doctype html>
+<html>
+ <head>
+  <meta charset="UTF-8">
+  <meta name="design-properties" content="{&quot;RULERS_VISIBLE&quot;:true,&quot;GUIDELINES_VISIBLE&quot;:false,&quot;SNAP_TO_OBJECTS&quot;:true,&quot;SNAP_TO_GRID&quot;:true,&quot;SNAPPING_DISTANCE&quot;:10,&quot;JAVA_SOURCES_ROOT&quot;:&quot;src/main/java&quot;,&quot;THEME&quot;:&quot;mytheme&quot;}">
+  <meta name="vaadin-version" content="8.0.5">
+  <meta name="package-mapping" content="hu_mik_mz8aex_messenger:hu.mik.MZ8AEX.Messenger">
+ </head>
+ <body>
+  <vaadin-css-layout style-name="form-template" responsive size-full>
+   <vaadin-label style-name="title" width-full height="10%" plain-text _id="lblNev">
+     You are logged in as 
+   </vaadin-label>
+   <vaadin-css-layout style-name="form-section" width-full height="40%">
+    <vaadin-text-area size-full readonly _id="txtMessenger"></vaadin-text-area>
+   </vaadin-css-layout>
+   <vaadin-css-layout width-full height="30%">
+    <vaadin-text-area size-full _id="txtMessage"></vaadin-text-area>
+   </vaadin-css-layout>
+   <vaadin-css-layout width-full>
+    <vaadin-css-layout width-full height="10%">
+     <vaadin-css-layout style-name="input-wrapper">
+      <vaadin-horizontal-layout>
+       <vaadin-button style-name="primary" plain-text _id="btnSend">
+         Send 
+       </vaadin-button>
+      </vaadin-horizontal-layout>
+     </vaadin-css-layout>
+    </vaadin-css-layout>
+   </vaadin-css-layout>
+  </vaadin-css-layout>
+ </body>
+</html>

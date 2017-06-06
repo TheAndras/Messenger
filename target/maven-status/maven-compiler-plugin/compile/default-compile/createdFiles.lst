@@ -1,0 +1,17 @@
+hu\mik\MZ8AEX\Chat\Message\Message.class
+hu\mik\MZ8AEX\Messenger\MessengerApplication.class
+hu\mik\MZ8AEX\Messenger\RegisterUI.class
+hu\mik\MZ8AEX\Messenger\Chat$1.class
+hu\mik\MZ8AEX\Messenger\MessengerApplication$Login$1.class
+hu\mik\MZ8AEX\Messenger\ChatService$MessageListener.class
+hu\mik\MZ8AEX\Messenger\Chat$ChatUIServlet.class
+hu\mik\MZ8AEX\Messenger\ChatUI.class
+hu\mik\MZ8AEX\Messenger\Chat.class
+hu\mik\MZ8AEX\Messenger\ChatService.class
+hu\mik\MZ8AEX\Messenger\MessengerApplication$Chat$1.class
+hu\mik\MZ8AEX\Messenger\MessengerApplication$Chat.class
+hu\mik\MZ8AEX\Messenger\LoginUI.class
+hu\mik\MZ8AEX\Messenger\MessengerApplication$Login.class
+hu\mik\MZ8AEX\Messenger\MessengerApplication$MyUI.class
+hu\mik\MZ8AEX\Messenger\ChatView.class
+hu\mik\MZ8AEX\Messenger\MessengerApplication$Register.class
