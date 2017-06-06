@@ -1,4 +1,4 @@
-package hu.mik.MZ8AEX.Messenger;
+/*package hu.mik.MZ8AEX.Messenger;
 
 import javax.servlet.annotation.WebServlet;
 
@@ -28,7 +28,11 @@ public class Chat extends UI {
 	private ChatView chatView;
 	private Registration registration;
 
+	
+	
 	String Username="TheAndras";
+	
+
 
 	
 	@Override
@@ -89,4 +93,4 @@ public class Chat extends UI {
 	public static class ChatUIServlet extends VaadinServlet {
 
 	}
-}
+}*/

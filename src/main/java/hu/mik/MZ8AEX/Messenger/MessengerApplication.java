@@ -7,6 +7,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.stereotype.Service;
 
 import com.vaadin.annotations.Theme;
+import com.vaadin.data.HasValue.ValueChangeEvent;
+import com.vaadin.data.HasValue.ValueChangeListener;
 import com.vaadin.event.ShortcutListener;
 import com.vaadin.event.ShortcutAction.KeyCode;
 import com.vaadin.server.VaadinRequest;
@@ -35,14 +37,10 @@ public class MessengerApplication {
 		
 		@Autowired
 		Login login;
-		@Autowired
-		Chat chat;
-		@Autowired
-		Register register;
 		
 		@Override
 		protected void init(VaadinRequest request) {
-			setContent(chat);
+			setContent(login);
 		}
 		
 	}
@@ -52,6 +50,11 @@ public class MessengerApplication {
 	@UIScope
 	public static class Login extends LoginUI {
 			
+		@Autowired
+		Chat chat;
+		@Autowired
+		Register register;
+		
 		@PostConstruct
 		public void init() {
 			btnLogin.addClickListener(new ClickListener() {
@@ -59,10 +62,22 @@ public class MessengerApplication {
 				@Override
 				public void buttonClick(ClickEvent event) {
 					if(txtUsername!=null){
-						String Username = txtUsername.getValue();	
-												
+						chat.setName(txtUsername.getValue());
+						MyUI.getCurrent().setContent(chat);					
 						
 					}
+				}
+			});
+			
+			btnRegister.addClickListener(new ClickListener() {
+				
+				@Override
+				public void buttonClick(ClickEvent event) {
+					
+							
+						MyUI.getCurrent().setContent(register);					
+						
+					
 				}
 			});
 		}		
@@ -79,6 +94,10 @@ public class MessengerApplication {
 		
 		String Username="TheAndras";
 		
+		public void setName(String name) {
+			this.Username = name;
+		}
+		
 		@PostConstruct
 		public void init() {
 			chatView = new ChatView(Username);
@@ -94,18 +113,27 @@ public class MessengerApplication {
 				});
 			});
 
-			chatView.btnSend.addClickListener(e -> {
-				chatService.addMessage(new Message(Username, chatView.txtMessage.getValue()));
-				chatView.txtMessage.setValue("");
-				chatView.txtMessage.focus();
-
+			
+			chatView.btnSend.addClickListener(new ClickListener() {
+				
+				@Override
+				public void buttonClick(ClickEvent event) {
+					chatService.addMessage(new Message(Username, chatView.txtMessage.getValue()));
+					chatView.txtMessage.setValue("");
+					chatView.txtMessage.focus();				
+				}
 			});
 
-			chatView.txtMessage.addValueChangeListener(e -> {
-				boolean msgValid = chatView.txtMessage.getValue().length() > 1;
-				chatView.btnSend.setEnabled(msgValid);
-				chatView.txtMessage.setValueChangeTimeout(0);
+			chatView.txtMessage.addValueChangeListener(new ValueChangeListener<String>() {
+				public void valueChange(ValueChangeEvent<String> event) {
+					boolean msgValid = chatView.txtMessage.getValue().length() > 1;
+					chatView.btnSend.setEnabled(msgValid);
+					chatView.txtMessage.setValueChangeTimeout(0);
+				}
 			});
+			
+			
+
 
 			addShortcutListener(new ShortcutListener("Send", KeyCode.ENTER, null) {
 
@@ -124,9 +152,22 @@ public class MessengerApplication {
 	@UIScope
 	public static class Register extends RegisterUI {
 		
+		//@Autowired
+		//Login login;
+		
 		@PostConstruct
 		public void init() {
-			
+			btnCancel.addClickListener(new ClickListener() {
+				
+				@Override
+				public void buttonClick(ClickEvent event) {
+					
+							
+						//MyUI.getCurrent().setContent(login);					
+						
+					
+				}
+			});
 		}
 		
 	}

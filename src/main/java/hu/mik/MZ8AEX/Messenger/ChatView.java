@@ -2,6 +2,7 @@ package hu.mik.MZ8AEX.Messenger;
 
 import hu.mik.MZ8AEX.Chat.Message.Message;
 
+@SuppressWarnings("serial")
 public class ChatView extends ChatUI {
 	//private boolean evenRow = false;
 
