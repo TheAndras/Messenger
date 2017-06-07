@@ -4,8 +4,11 @@ import javax.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.stereotype.Service;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.scheduling.annotation.EnableScheduling;
+import org.springframework.stereotype.Repository;
 
+import com.vaadin.annotations.Push;
 import com.vaadin.annotations.Theme;
 import com.vaadin.data.HasValue.ValueChangeEvent;
 import com.vaadin.data.HasValue.ValueChangeListener;
@@ -17,11 +20,14 @@ import com.vaadin.spring.annotation.SpringComponent;
 import com.vaadin.spring.annotation.SpringUI;
 import com.vaadin.spring.annotation.UIScope;
 import com.vaadin.ui.UI;
+import com.vaadin.ui.Window;
 import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.Button.ClickListener;
+import com.vaadin.ui.Notification;
 
 import hu.mik.MZ8AEX.Chat.Message.Message;
 
+@Configuration
 @SpringBootApplication
 public class MessengerApplication {
 
@@ -33,6 +39,7 @@ public class MessengerApplication {
 	@SuppressWarnings("serial")
 	@Theme("mytheme")
 	@SpringUI
+	@Repository
 	public static class MyUI extends UI {
 		
 		@Autowired
@@ -48,10 +55,9 @@ public class MessengerApplication {
 	@SuppressWarnings("serial")
 	@SpringComponent
 	@UIScope
+	@Repository
 	public static class Login extends LoginUI {
 			
-		@Autowired
-		Chat chat;
 		@Autowired
 		Register register;
 		
@@ -62,8 +68,9 @@ public class MessengerApplication {
 				@Override
 				public void buttonClick(ClickEvent event) {
 					if(txtUsername!=null){
-						chat.setName(txtUsername.getValue());
-						MyUI.getCurrent().setContent(chat);					
+						ChatView chatView = new ChatView(txtUsername.getValue());
+						MyUI.getCurrent().setContent(chatView);	
+						
 						
 					}
 				}
@@ -83,73 +90,11 @@ public class MessengerApplication {
 		}		
 	}
 	
-	@SuppressWarnings("serial")
-	@SpringComponent
-	@UIScope
-	public static class Chat extends ChatUI {
-		
-		private static ChatService chatService = new ChatService();
-		private ChatView chatView;
-		private Registration registration;
-		
-		String Username="TheAndras";
-		
-		public void setName(String name) {
-			this.Username = name;
-		}
-		
-		@PostConstruct
-		public void init() {
-			chatView = new ChatView(Username);
-
-
-			for (Message message : chatService.getMessageLog()) {
-				chatView.renderMessage(message);
-			}
-
-			registration = chatService.addMessageListener(message -> {
-				chatView.getUI().access(() -> {
-					chatView.renderMessage(message);
-				});
-			});
-
-			
-			chatView.btnSend.addClickListener(new ClickListener() {
-				
-				@Override
-				public void buttonClick(ClickEvent event) {
-					chatService.addMessage(new Message(Username, chatView.txtMessage.getValue()));
-					chatView.txtMessage.setValue("");
-					chatView.txtMessage.focus();				
-				}
-			});
-
-			chatView.txtMessage.addValueChangeListener(new ValueChangeListener<String>() {
-				public void valueChange(ValueChangeEvent<String> event) {
-					boolean msgValid = chatView.txtMessage.getValue().length() > 1;
-					chatView.btnSend.setEnabled(msgValid);
-					chatView.txtMessage.setValueChangeTimeout(0);
-				}
-			});
-			
-			
-
-
-			addShortcutListener(new ShortcutListener("Send", KeyCode.ENTER, null) {
-
-				@Override
-				public void handleAction(Object sender, Object target) {
-					chatView.btnSend.click();
-				}
-			});
-
-		}
-		
-	}
 	
 	@SuppressWarnings("serial")
 	@SpringComponent
 	@UIScope
+	@Repository
 	public static class Register extends RegisterUI {
 		
 		//@Autowired

@@ -3,10 +3,13 @@ package hu.mik.MZ8AEX.Messenger;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
+import org.springframework.stereotype.Service;
+
 import hu.mik.MZ8AEX.Chat.Message.Message;
 
 import com.vaadin.shared.Registration;
 
+@Service
 public final class ChatService {
 	public static final int MAX_LOG_SIZE = 50;
 

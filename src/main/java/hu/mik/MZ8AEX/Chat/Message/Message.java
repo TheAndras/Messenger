@@ -1,5 +1,8 @@
 package hu.mik.MZ8AEX.Chat.Message;
 
+import org.springframework.stereotype.Service;
+
+@Service
 public class Message {
 
 	private String name;
