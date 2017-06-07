@@ -1,1 +1,1 @@
-web: java $JAVA_OPTS -cp target/classes:target/dependency/* hu.mik.MZ8AEX.Messenger.MessengerApplication
+web: java $JAVA_OPTS -Dserver.port=$PORT -jar target/*hu.mik.MZ8AEX.Messenger.MessengerApplication.jar
