@@ -7,10 +7,12 @@ import org.springframework.stereotype.Service;
 
 import hu.mik.MZ8AEX.Chat.Message.Message;
 
+import com.vaadin.annotations.Push;
 import com.vaadin.shared.Registration;
+import com.vaadin.shared.ui.ui.Transport;
 
 @Service
-public final class ChatService {
+public final class ChatService{
 	public static final int MAX_LOG_SIZE = 50;
 
 	interface MessageListener {
@@ -24,6 +26,7 @@ public final class ChatService {
 		listeners.add(e);
 		return () -> listeners.remove(e);
 	}
+	
 
 	public void addMessage(Message message) {
 		messageLog.add(message);
