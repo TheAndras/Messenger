@@ -1,1 +1,1 @@
-web: java $JAVA_OPTS -Dserver.port=$PORT -jar target/*hu.mik.MZ8AEX.Messenger.MessengerApplication.jar
+web: java $JAVA_OPTS -Dserver.port=$PORT -jar target/*Messenger-1.0-SNAPSHOT.jar
