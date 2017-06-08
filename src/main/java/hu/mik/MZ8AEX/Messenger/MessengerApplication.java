@@ -71,11 +71,14 @@ public class MessengerApplication {
 				
 				@Override
 				public void buttonClick(ClickEvent event) {
-					if(txtUsername!=null){
+					if(txtUsername.getValue()!=""){
 						ChatView chatView = new ChatView(txtUsername.getValue());
 						MyUI.getCurrent().setContent(chatView);	
 						
 						
+					}else{
+						Notification notification = new Notification("Error");
+						notification.show("Error", "Please enter your Username to log in", Notification.TYPE_ERROR_MESSAGE);
 					}
 				}
 			});

@@ -37,7 +37,7 @@ public class ChatView extends ChatUI {
 
 	@SuppressWarnings({ "deprecation", "static-access" })
 	public ChatView(String Username) {
-		new RefreshThread().start();
+		//new RefreshThread().start();
 		lblNev.setValue("You are logged in as " + Username);
 		txtMessage.setPlaceholder("Message");
 
@@ -49,8 +49,8 @@ public class ChatView extends ChatUI {
 					updateMessage();
 				});
 			} catch (Exception e) {
-				Notification notification = new Notification("Error");
-				notification.show("Error", "Please try again", Notification.TYPE_ERROR_MESSAGE);
+				//Notification notification = new Notification("Error");
+				//notification.show("Error", "Something happened", Notification.TYPE_ERROR_MESSAGE);
 			}
 		});
 
@@ -83,14 +83,20 @@ public class ChatView extends ChatUI {
 
 	public void updateMessage() {
 		String messages = "";
+		boolean FirstRow=true;
 		for (Message message : chatService.getMessageLog()) {
+			if(FirstRow){
+				messages +=message.getName() + "\t\t" + message.getMessage();
+				FirstRow = false;
+			}else{
 			messages += "\n" + message.getName() + "\t\t" + message.getMessage();
+			}
 		}
 		txtMessenger.setValue(messages);
 
 	}
 	
-	public class RefreshThread extends Thread{
+	/*public class RefreshThread extends Thread{
 
 	    boolean run = true;
 
@@ -113,6 +119,6 @@ public class ChatView extends ChatUI {
 				 run = false;
 			}
 		}
-	}
+	}*/
 
 }

@@ -14,7 +14,7 @@ import com.vaadin.shared.ui.ui.Transport;
 @Service
 @Push
 public final class ChatService{
-	public static final int MAX_LOG_SIZE = 12;
+	public static final int MAX_LOG_SIZE = 13;
 
 	interface MessageListener {
 		void messageReceived(Message message);
