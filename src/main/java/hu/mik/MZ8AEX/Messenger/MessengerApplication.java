@@ -1,6 +1,8 @@
 package hu.mik.MZ8AEX.Messenger;
 
 import javax.annotation.PostConstruct;
+import javax.servlet.annotation.WebServlet;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -10,11 +12,13 @@ import org.springframework.stereotype.Repository;
 
 import com.vaadin.annotations.Push;
 import com.vaadin.annotations.Theme;
+import com.vaadin.annotations.VaadinServletConfiguration;
 import com.vaadin.data.HasValue.ValueChangeEvent;
 import com.vaadin.data.HasValue.ValueChangeListener;
 import com.vaadin.event.ShortcutListener;
 import com.vaadin.event.ShortcutAction.KeyCode;
 import com.vaadin.server.VaadinRequest;
+import com.vaadin.server.VaadinServlet;
 import com.vaadin.shared.Registration;
 import com.vaadin.spring.annotation.SpringComponent;
 import com.vaadin.spring.annotation.SpringUI;
@@ -116,4 +120,10 @@ public class MessengerApplication {
 		}
 		
 	}
+    @SuppressWarnings("serial")
+	@WebServlet ( urlPatterns = "/*" , name = "MyUIServlet" , asyncSupported = true )
+    @VaadinServletConfiguration ( ui = MyUI.class , productionMode = false )
+    public static class MyUIServlet extends VaadinServlet
+    {
+    }
 }

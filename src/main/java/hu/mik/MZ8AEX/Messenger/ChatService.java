@@ -12,8 +12,9 @@ import com.vaadin.shared.Registration;
 import com.vaadin.shared.ui.ui.Transport;
 
 @Service
+@Push
 public final class ChatService{
-	public static final int MAX_LOG_SIZE = 50;
+	public static final int MAX_LOG_SIZE = 12;
 
 	interface MessageListener {
 		void messageReceived(Message message);
@@ -22,9 +23,9 @@ public final class ChatService{
 	List<Message> messageLog = new CopyOnWriteArrayList<>();
 	List<MessageListener> listeners = new CopyOnWriteArrayList<>();
 
-	public Registration addMessageListener(MessageListener e) {
-		listeners.add(e);
-		return () -> listeners.remove(e);
+	public Registration addMessageListener(MessageListener messageListener) {
+		listeners.add(messageListener);
+		return () -> listeners.remove(messageListener);
 	}
 	
 
